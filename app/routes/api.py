@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# Part of Toasty Deployer. See LICENSE file for full copyright and licensing details.
+
 from flask import Blueprint, jsonify
 
 from app.db import get_connection
