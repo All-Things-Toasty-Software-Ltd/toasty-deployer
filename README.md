@@ -78,7 +78,7 @@ structured REST API for seamless integration with Odoo.
 
     Create `/etc/systemd/system/toasty-deployer.service`:
 
-    ```toml
+    ```
     [Unit]
     Description=Toasty Deployer GitHub App Webhook Service
     After=network.target
