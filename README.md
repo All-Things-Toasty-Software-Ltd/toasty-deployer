@@ -31,7 +31,7 @@ structured REST API for seamless integration with Odoo.
 
 2. Setup Repository
     ```bash
-   git clone https://github.com/All-Things-Toasty-Software-Ltd/toasty-deployer.git /opt/toasty-deployer
+    git clone https://github.com/All-Things-Toasty-Software-Ltd/toasty-deployer.git /opt/toasty-deployer
     cd /opt/toasty-deployer
     python3 -m venv venv
     source venv/bin/activate
