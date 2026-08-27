@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toasty Deployer | Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #fff5ed;
+            --card-bg: #ffffff;
+            --accent-header: #fbbe75;
+            --text-color: #1B1319;
+            --border-color: #f3d1a8;
+            --code-bg: #FAF0E6;
+            --badge-success: #2e7d32;
+            --badge-failure: #c62828;
+            --badge-running: #ef6c00;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: var(--accent-header);
+            padding: 24px 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(27, 19, 25, 0.05);
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            margin: 0 0 8px 0;
+            color: var(--text-color);
+            font-size: 28px;
+        }
+
+        p.subtitle {
+            margin: 0;
+            opacity: 0.85;
+            font-size: 14px;
+        }
+
+        .table-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(27, 19, 25, 0.03);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #FFF9F3;
+            color: var(--text-color);
+            text-align: left;
+            padding: 16px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .badge-success { background-color: var(--badge-success); }
+        .badge-failure { background-color: var(--badge-failure); }
+        .badge-running { background-color: var(--badge-running); }
+
+        pre {
+            background: var(--code-bg);
+            color: var(--text-color);
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            max-height: 250px;
+        }
+
+        details summary {
+            cursor: pointer;
+            color: #d88118;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Toasty Deployer Dashboard</h1>
+        <p class="subtitle">System Status: <strong>Active</strong> | Endpoint: <code>deploy.toastysoftware.co.uk</code></p>
+    </header>
+
+    <div class="table-card">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Timestamp</th>
+                <th>Repository</th>
+                <th>Commit</th>
+                <th>Status</th>
+                <th>Exit Code</th>
+                <th>Logs</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for run in runs %}
+            <tr>
+                <td>#{{ run['id'] }}</td>
+                <td>{{ run['created_at'] }}</td>
+                <td><strong>{{ run['owner'] }}/{{ run['repo'] }}</strong></td>
+                <td><code>{{ run['commit_sha'][:7] }}</code></td>
+                <td><span class="badge badge-{{ run['status'] }}">{{ run['status'] }}</span></td>
+                <td><code>{{ run['exit_code'] }}</code></td>
+                <td>
+                    <details>
+                        <summary>View Output</summary>
+                        <pre>{{ run['logs'] }}</pre>
+                    </details>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
