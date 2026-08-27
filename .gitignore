@@ -1,2 +1,17 @@
+# JetBrains IDE files
 .idea/
+
+# Python virtual environment
 .venv/
+
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+
+# Local database
+deployments.db
+
+# Private keys
+*.pem
