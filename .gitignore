@@ -15,3 +15,6 @@ deployments.db
 
 # Private keys
 *.pem
+
+# Secrets related to the deployer scripts
+secrets/
